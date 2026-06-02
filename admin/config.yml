@@ -1,223 +1,186 @@
 backend:
-  name: git-gatewayrepo: Brandirectivecoder/mweb_v2
-  branch: main
+  name: github
+  repo: Brandirectivecoder/mweb_v2 
+  branch: main 
 
-media_folder: assets
-public_folder: /assets
+media_folder: "assets"
+public_folder: "assets"
 
 collections:
   - name: "site"
     label: "Site Content"
     files:
-
-      # ─────────────────────────────────────────
-      - name: "meta"
-        label: "🔍 SEO / Meta"
-        file: "data/content.json"
+      - file: "data/content.json"
+        label: "All Website Content"
+        name: "home"
         fields:
-          - { label: "Page Title",       name: meta-title, widget: string }
-          - { label: "Meta Description", name: meta-desc,  widget: text }
+          # --- SEO & NAV ---
+          - { label: "Page Title", name: "meta-title", widget: "string" }
+          - { label: "Meta Description", name: "meta-desc", widget: "text" }
+          - { label: "Nav Item 1", name: "nav-1", widget: "string" }
+          - { label: "Nav Item 2", name: "nav-2", widget: "string" }
+          - { label: "Nav Item 3", name: "nav-3", widget: "string" }
+          - { label: "Nav Item 4", name: "nav-4", widget: "string" }
+          - { label: "Nav Item 5", name: "nav-5", widget: "string" }
 
-      # ─────────────────────────────────────────
-      - name: "hero"
-        label: "🚀 Hero Section"
-        file: "data/content.json"
-        fields:
-          - { label: "Title Word 1 (Building)",  name: hero-title-1,    widget: string }
-          - { label: "Title Word 2 (brands)",    name: hero-title-2,    widget: string }
-          - { label: "Title Word 3 (businesses)",name: hero-title-3,    widget: string }
-          - { label: "Title Word 4 (that)",      name: hero-title-4,    widget: string }
-          - { label: "Title Word 5 (convert.)",  name: hero-title-5,    widget: string }
-          - { label: "Lede Paragraph",           name: hero-lede,       widget: text }
-          - { label: "Status Label",             name: hero-status,     widget: string }
-          - { label: "CTA Button Text",          name: hero-cta-text,   widget: string }
-          - { label: "Meta Row 1 Left",          name: hero-meta-1,     widget: string }
-          - { label: "Meta Row 1 Right",         name: hero-meta-2,     widget: string }
-          - { label: "Meta Row 2 Left",          name: hero-meta-3,     widget: string }
-          - { label: "Meta Row 2 Right",         name: hero-meta-4,     widget: string }
-          - { label: "Fact 1 Label",             name: hero-fact-1-lbl, widget: string }
-          - { label: "Fact 1 Value",             name: hero-fact-1-val, widget: string }
-          - { label: "Fact 2 Label",             name: hero-fact-2-lbl, widget: string }
-          - { label: "Fact 2 Value",             name: hero-fact-2-val, widget: string }
-          - { label: "Fact 3 Label",             name: hero-fact-3-lbl, widget: string }
-          - { label: "Fact 3 Value",             name: hero-fact-3-val, widget: string }
-          - { label: "Fact 4 Label",             name: hero-fact-4-lbl, widget: string }
-          - { label: "Fact 4 Value",             name: hero-fact-4-val, widget: string }
+          # --- HERO ---
+          - { label: "Title Word 1", name: "hero-title-1", widget: "string" }
+          - { label: "Title Word 2", name: "hero-title-2", widget: "string" }
+          - { label: "Title Word 3", name: "hero-title-3", widget: "string" }
+          - { label: "Title Word 4", name: "hero-title-4", widget: "string" }
+          - { label: "Title Word 5", name: "hero-title-5", widget: "string" }
+          - { label: "Lede Paragraph", name: "hero-lede", widget: "text" }
+          - { label: "Status Label", name: "hero-status", widget: "string" }
+          - { label: "CTA Button Text", name: "hero-cta-text", widget: "string" }
+          - { label: "Meta Row 1 Left", name: "hero-meta-1", widget: "string" }
+          - { label: "Meta Row 1 Right", name: "hero-meta-2", widget: "string" }
+          - { label: "Meta Row 2 Left", name: "hero-meta-3", widget: "string" }
+          - { label: "Meta Row 2 Right", name: "hero-meta-4", widget: "string" }
+          - { label: "Fact 1 Label", name: "hero-fact-1-lbl", widget: "string" }
+          - { label: "Fact 1 Value", name: "hero-fact-1-val", widget: "string" }
+          - { label: "Fact 2 Label", name: "hero-fact-2-lbl", widget: "string" }
+          - { label: "Fact 2 Value", name: "hero-fact-2-val", widget: "string" }
+          - { label: "Fact 3 Label", name: "hero-fact-3-lbl", widget: "string" }
+          - { label: "Fact 3 Value", name: "hero-fact-3-val", widget: "string" }
+          - { label: "Fact 4 Label", name: "hero-fact-4-lbl", widget: "string" }
+          - { label: "Fact 4 Value", name: "hero-fact-4-val", widget: "string" }
 
-      # ─────────────────────────────────────────
-      - name: "about"
-        label: "👤 About Section"
-        file: "data/content.json"
-        fields:
-          - { label: "Section Tag",      name: about-tag,       widget: string }
-          - { label: "Copy Line 1",      name: about-copy-1,    widget: string }
-          - { label: "Copy Line 2",      name: about-copy-2,    widget: string }
-          - { label: "Body Paragraph 1", name: about-body-1,    widget: text }
-          - { label: "Body Paragraph 2", name: about-body-2,    widget: text }
-          - { label: "Signature Name",   name: about-sig-name,  widget: string }
-          - { label: "Signature Title",  name: about-sig-title, widget: string }
-          - { label: "Dossier Header",   name: dossier-top,     widget: string }
-          - { label: "Dossier ID",       name: dossier-id,      widget: string }
-          - { label: "Portrait Photo",   name: dossier-img,     widget: image }
-          - { label: "Name",             name: dossier-name,    widget: string }
-          - { label: "Based",            name: dossier-based,   widget: string }
-          - { label: "Role",             name: dossier-role,    widget: string }
-          - { label: "Clearance",        name: dossier-clearance, widget: string }
-          - { label: "Strip Text",       name: dossier-strip,   widget: string }
+          # --- ABOUT & DOSSIER ---
+          - { label: "About Tag", name: "about-tag", widget: "string" }
+          - { label: "About Copy Line 1", name: "about-copy-1", widget: "string" }
+          - { label: "About Copy Line 2", name: "about-copy-2", widget: "string" }
+          - { label: "About Body Paragraph 1", name: "about-body-1", widget: "text" }
+          - { label: "About Body Paragraph 2", name: "about-body-2", widget: "text" }
+          - { label: "About Signature Name", name: "about-sig-name", widget: "string" }
+          - { label: "About Signature Title", name: "about-sig-title", widget: "string" }
+          - { label: "Dossier Header", name: "dossier-top", widget: "string" }
+          - { label: "Dossier ID", name: "dossier-id", widget: "string" }
+          - { label: "Portrait Photo", name: "dossier-img", widget: "image" }
+          - { label: "Name", name: "dossier-name", widget: "string" }
+          - { label: "Based", name: "dossier-based", widget: "string" }
+          - { label: "Role", name: "dossier-role", widget: "string" }
+          - { label: "Clearance", name: "dossier-clearance", widget: "string" }
+          - { label: "Strip Text", name: "dossier-strip", widget: "string" }
 
-      # ─────────────────────────────────────────
-      - name: "practice"
-        label: "🛠 Practice Section"
-        file: "data/content.json"
-        fields:
-          - { label: "Section Tag",  name: prac-tag,   widget: string }
-          - { label: "Section Title",name: prac-title, widget: string }
-          - { label: "Section Lead", name: prac-lead,  widget: text }
-          - { label: "Service 1 Name",name: prac-1-name, widget: string }
-          - { label: "Service 1 Sub", name: prac-1-sub,  widget: text }
-          - { label: "Service 2 Name",name: prac-2-name, widget: string }
-          - { label: "Service 2 Sub", name: prac-2-sub,  widget: text }
-          - { label: "Service 3 Name",name: prac-3-name, widget: string }
-          - { label: "Service 3 Sub", name: prac-3-sub,  widget: text }
-          - { label: "Service 4 Name",name: prac-4-name, widget: string }
-          - { label: "Service 4 Sub", name: prac-4-sub,  widget: text }
-          - { label: "Service 5 Name",name: prac-5-name, widget: string }
-          - { label: "Service 5 Sub", name: prac-5-sub,  widget: text }
+          # --- PRACTICE ---
+          - { label: "Practice Tag", name: "prac-tag", widget: "string" }
+          - { label: "Practice Title", name: "prac-title", widget: "string" }
+          - { label: "Practice Lead", name: "prac-lead", widget: "text" }
+          - { label: "Service 1 Name", name: "prac-1-name", widget: "string" }
+          - { label: "Service 1 Sub", name: "prac-1-sub", widget: "text" }
+          - { label: "Service 2 Name", name: "prac-2-name", widget: "string" }
+          - { label: "Service 2 Sub", name: "prac-2-sub", widget: "text" }
+          - { label: "Service 3 Name", name: "prac-3-name", widget: "string" }
+          - { label: "Service 3 Sub", name: "prac-3-sub", widget: "text" }
+          - { label: "Service 4 Name", name: "prac-4-name", widget: "string" }
+          - { label: "Service 4 Sub", name: "prac-4-sub", widget: "text" }
+          - { label: "Service 5 Name", name: "prac-5-name", widget: "string" }
+          - { label: "Service 5 Sub", name: "prac-5-sub", widget: "text" }
 
-      # ─────────────────────────────────────────
-      - name: "process"
-        label: "⚙️ Process Section"
-        file: "data/content.json"
-        fields:
-          - { label: "Section Tag",   name: proc-tag,    widget: string }
-          - { label: "Section Title", name: proc-title,  widget: string }
-          - { label: "Section Lead",  name: proc-lead,   widget: string }
-          - { label: "Step 1 Title",  name: proc-1-title, widget: string }
-          - { label: "Step 1 Desc",   name: proc-1-desc,  widget: text }
-          - { label: "Step 1 Tag",    name: proc-1-tag,   widget: string }
-          - { label: "Step 2 Title",  name: proc-2-title, widget: string }
-          - { label: "Step 2 Desc",   name: proc-2-desc,  widget: text }
-          - { label: "Step 2 Tag",    name: proc-2-tag,   widget: string }
-          - { label: "Step 3 Title",  name: proc-3-title, widget: string }
-          - { label: "Step 3 Desc",   name: proc-3-desc,  widget: text }
-          - { label: "Step 3 Tag",    name: proc-3-tag,   widget: string }
-          - { label: "Step 4 Title",  name: proc-4-title, widget: string }
-          - { label: "Step 4 Desc",   name: proc-4-desc,  widget: text }
-          - { label: "Step 4 Tag",    name: proc-4-tag,   widget: string }
-          - { label: "Step 5 Title",  name: proc-5-title, widget: string }
-          - { label: "Step 5 Desc",   name: proc-5-desc,  widget: text }
-          - { label: "Step 5 Tag",    name: proc-5-tag,   widget: string }
+          # --- PROCESS ---
+          - { label: "Process Tag", name: "proc-tag", widget: "string" }
+          - { label: "Process Title", name: "proc-title", widget: "string" }
+          - { label: "Process Lead", name: "proc-lead", widget: "string" }
+          - { label: "Step 1 Title", name: "proc-1-title", widget: "string" }
+          - { label: "Step 1 Desc", name: "proc-1-desc", widget: "text" }
+          - { label: "Step 1 Tag", name: "proc-1-tag", widget: "string" }
+          - { label: "Step 2 Title", name: "proc-2-title", widget: "string" }
+          - { label: "Step 2 Desc", name: "proc-2-desc", widget: "text" }
+          - { label: "Step 2 Tag", name: "proc-2-tag", widget: "string" }
+          - { label: "Step 3 Title", name: "proc-3-title", widget: "string" }
+          - { label: "Step 3 Desc", name: "proc-3-desc", widget: "text" }
+          - { label: "Step 3 Tag", name: "proc-3-tag", widget: "string" }
+          - { label: "Step 4 Title", name: "proc-4-title", widget: "string" }
+          - { label: "Step 4 Desc", name: "proc-4-desc", widget: "text" }
+          - { label: "Step 4 Tag", name: "proc-4-tag", widget: "string" }
+          - { label: "Step 5 Title", name: "proc-5-title", widget: "string" }
+          - { label: "Step 5 Desc", name: "proc-5-desc", widget: "text" }
+          - { label: "Step 5 Tag", name: "proc-5-tag", widget: "string" }
 
-      # ─────────────────────────────────────────
-      - name: "work"
-        label: "💼 Work / Cases"
-        file: "data/content.json"
-        fields:
-          - { label: "Section Tag",   name: work-tag,   widget: string }
-          - { label: "Section Title", name: work-title, widget: string }
-          - { label: "Case 1 Index",  name: work-1-ix,    widget: string }
-          - { label: "Case 1 Title",  name: work-1-title, widget: string }
-          - { label: "Case 1 Role",   name: work-1-role,  widget: string }
-          - { label: "Case 1 Story",  name: work-1-story, widget: text }
-          - { label: "Case 1 Metric 1 Value", name: work-1-m1,     widget: string }
-          - { label: "Case 1 Metric 1 Label", name: work-1-m1-lbl, widget: string }
-          - { label: "Case 1 Metric 2 Value", name: work-1-m2,     widget: string }
-          - { label: "Case 1 Metric 2 Label", name: work-1-m2-lbl, widget: string }
-          - { label: "Case 1 Tag 1",  name: work-1-t1, widget: string }
-          - { label: "Case 1 Tag 2",  name: work-1-t2, widget: string }
-          - { label: "Case 1 Tag 3",  name: work-1-t3, widget: string }
-          - { label: "Case 1 Tag 4",  name: work-1-t4, widget: string }
-          - { label: "Case 1 URL",    name: work-1-url,  widget: string }
-          - { label: "Case 1 Link",   name: work-1-link, widget: string }
-          - { label: "Case 2 Index",  name: work-2-ix,    widget: string }
-          - { label: "Case 2 Title",  name: work-2-title, widget: string }
-          - { label: "Case 2 Role",   name: work-2-role,  widget: string }
-          - { label: "Case 2 Story",  name: work-2-story, widget: text }
-          - { label: "Case 2 Metric 1 Value", name: work-2-m1,     widget: string }
-          - { label: "Case 2 Metric 1 Label", name: work-2-m1-lbl, widget: string }
-          - { label: "Case 2 Metric 2 Value", name: work-2-m2,     widget: string }
-          - { label: "Case 2 Metric 2 Label", name: work-2-m2-lbl, widget: string }
-          - { label: "Case 2 Tag 1",  name: work-2-t1, widget: string }
-          - { label: "Case 2 Tag 2",  name: work-2-t2, widget: string }
-          - { label: "Case 2 Tag 3",  name: work-2-t3, widget: string }
-          - { label: "Case 2 Tag 4",  name: work-2-t4, widget: string }
-          - { label: "Case 2 URL",    name: work-2-url,  widget: string }
-          - { label: "Case 2 Link",   name: work-2-link, widget: string }
-          - { label: "More Work Title", name: more-title, widget: string }
-          - { label: "More Work Count", name: more-count, widget: string }
-          - { label: "Mini 1 Title",  name: more-1-title, widget: string }
-          - { label: "Mini 1 Sub",    name: more-1-sub,   widget: string }
-          - { label: "Mini 2 Title",  name: more-2-title, widget: string }
-          - { label: "Mini 2 Sub",    name: more-2-sub,   widget: string }
-          - { label: "Mini 3 Title",  name: more-3-title, widget: string }
-          - { label: "Mini 3 Sub",    name: more-3-sub,   widget: string }
+          # --- WORK ---
+          - { label: "Work Tag", name: "work-tag", widget: "string" }
+          - { label: "Work Title", name: "work-title", widget: "string" }
+          - { label: "Case 1 Index", name: "work-1-ix", widget: "string" }
+          - { label: "Case 1 Title", name: "work-1-title", widget: "string" }
+          - { label: "Case 1 Role", name: "work-1-role", widget: "string" }
+          - { label: "Case 1 Story", name: "work-1-story", widget: "text" }
+          - { label: "Case 1 Metric 1 Value", name: "work-1-m1", widget: "string" }
+          - { label: "Case 1 Metric 1 Label", name: "work-1-m1-lbl", widget: "string" }
+          - { label: "Case 1 Metric 2 Value", name: "work-1-m2", widget: "string" }
+          - { label: "Case 1 Metric 2 Label", name: "work-1-m2-lbl", widget: "string" }
+          - { label: "Case 1 Tag 1", name: "work-1-t1", widget: "string" }
+          - { label: "Case 1 Tag 2", name: "work-1-t2", widget: "string" }
+          - { label: "Case 1 Tag 3", name: "work-1-t3", widget: "string" }
+          - { label: "Case 1 Tag 4", name: "work-1-t4", widget: "string" }
+          - { label: "Case 1 URL", name: "work-1-url", widget: "string" }
+          - { label: "Case 1 Link", name: "work-1-link", widget: "string" }
+          - { label: "Case 2 Index", name: "work-2-ix", widget: "string" }
+          - { label: "Case 2 Title", name: "work-2-title", widget: "string" }
+          - { label: "Case 2 Role", name: "work-2-role", widget: "string" }
+          - { label: "Case 2 Story", name: "work-2-story", widget: "text" }
+          - { label: "Case 2 Metric 1 Value", name: "work-2-m1", widget: "string" }
+          - { label: "Case 2 Metric 1 Label", name: "work-2-m1-lbl", widget: "string" }
+          - { label: "Case 2 Metric 2 Value", name: "work-2-m2", widget: "string" }
+          - { label: "Case 2 Metric 2 Label", name: "work-2-m2-lbl", widget: "string" }
+          - { label: "Case 2 Tag 1", name: "work-2-t1", widget: "string" }
+          - { label: "Case 2 Tag 2", name: "work-2-t2", widget: "string" }
+          - { label: "Case 2 Tag 3", name: "work-2-t3", widget: "string" }
+          - { label: "Case 2 Tag 4", name: "work-2-t4", widget: "string" }
+          - { label: "Case 2 URL", name: "work-2-url", widget: "string" }
+          - { label: "Case 2 Link", name: "work-2-link", widget: "string" }
+          - { label: "More Work Title", name: "more-title", widget: "string" }
+          - { label: "More Work Count", name: "more-count", widget: "string" }
+          - { label: "Mini 1 Title", name: "more-1-title", widget: "string" }
+          - { label: "Mini 1 Sub", name: "more-1-sub", widget: "string" }
+          - { label: "Mini 2 Title", name: "more-2-title", widget: "string" }
+          - { label: "Mini 2 Sub", name: "more-2-sub", widget: "string" }
+          - { label: "Mini 3 Title", name: "more-3-title", widget: "string" }
+          - { label: "Mini 3 Sub", name: "more-3-sub", widget: "string" }
 
-      # ─────────────────────────────────────────
-      - name: "proof"
-        label: "📊 Proof / Numbers"
-        file: "data/content.json"
-        fields:
-          - { label: "Section Tag",   name: proof-tag,   widget: string }
-          - { label: "Section Title", name: proof-title, widget: string }
-          - { label: "Stat 1 Value",  name: proof-1-val, widget: string }
-          - { label: "Stat 1 Symbol", name: proof-1-sym, widget: string }
-          - { label: "Stat 1 Label",  name: proof-1-lbl, widget: text }
-          - { label: "Stat 2 Value",  name: proof-2-val, widget: string }
-          - { label: "Stat 2 Symbol", name: proof-2-sym, widget: string }
-          - { label: "Stat 2 Label",  name: proof-2-lbl, widget: text }
-          - { label: "Stat 3 Value",  name: proof-3-val, widget: string }
-          - { label: "Stat 3 Symbol", name: proof-3-sym, widget: string }
-          - { label: "Stat 3 Label",  name: proof-3-lbl, widget: text }
-          - { label: "Stat 4 Value",  name: proof-4-val, widget: string }
-          - { label: "Stat 4 Symbol", name: proof-4-sym, widget: string }
-          - { label: "Stat 4 Label",  name: proof-4-lbl, widget: text }
+          # --- PROOF ---
+          - { label: "Proof Tag", name: "proof-tag", widget: "string" }
+          - { label: "Proof Title", name: "proof-title", widget: "string" }
+          - { label: "Stat 1 Value", name: "proof-1-val", widget: "string" }
+          - { label: "Stat 1 Symbol", name: "proof-1-sym", widget: "string" }
+          - { label: "Stat 1 Label", name: "proof-1-lbl", widget: "text" }
+          - { label: "Stat 2 Value", name: "proof-2-val", widget: "string" }
+          - { label: "Stat 2 Symbol", name: "proof-2-sym", widget: "string" }
+          - { label: "Stat 2 Label", name: "proof-2-lbl", widget: "text" }
+          - { label: "Stat 3 Value", name: "proof-3-val", widget: "string" }
+          - { label: "Stat 3 Symbol", name: "proof-3-sym", widget: "string" }
+          - { label: "Stat 3 Label", name: "proof-3-lbl", widget: "text" }
+          - { label: "Stat 4 Value", name: "proof-4-val", widget: "string" }
+          - { label: "Stat 4 Symbol", name: "proof-4-sym", widget: "string" }
+          - { label: "Stat 4 Label", name: "proof-4-lbl", widget: "text" }
 
-      # ─────────────────────────────────────────
-      - name: "voices"
-        label: "💬 Testimonials"
-        file: "data/content.json"
-        fields:
-          - { label: "Section Tag",   name: voice-tag,   widget: string }
-          - { label: "Section Title", name: voice-title, widget: string }
-          - { label: "Section Lead",  name: voice-lead,  widget: string }
-          - { label: "Review 1 Body", name: voice-1-body, widget: text }
-          - { label: "Review 1 Who",  name: voice-1-who,  widget: string }
-          - { label: "Review 2 Body", name: voice-2-body, widget: text }
-          - { label: "Review 2 Who",  name: voice-2-who,  widget: string }
-          - { label: "Review 3 Body", name: voice-3-body, widget: text }
-          - { label: "Review 3 Who",  name: voice-3-who,  widget: string }
-          - { label: "Review 4 Body", name: voice-4-body, widget: text }
-          - { label: "Review 4 Who",  name: voice-4-who,  widget: string }
+          # --- VOICES ---
+          - { label: "Voices Tag", name: "voice-tag", widget: "string" }
+          - { label: "Voices Title", name: "voice-title", widget: "string" }
+          - { label: "Voices Lead", name: "voice-lead", widget: "string" }
+          - { label: "Review 1 Body", name: "voice-1-body", widget: "text" }
+          - { label: "Review 1 Who", name: "voice-1-who", widget: "string" }
+          - { label: "Review 2 Body", name: "voice-2-body", widget: "text" }
+          - { label: "Review 2 Who", name: "voice-2-who", widget: "string" }
+          - { label: "Review 3 Body", name: "voice-3-body", widget: "text" }
+          - { label: "Review 3 Who", name: "voice-3-who", widget: "string" }
+          - { label: "Review 4 Body", name: "voice-4-body", widget: "text" }
+          - { label: "Review 4 Who", name: "voice-4-who", widget: "string" }
 
-      # ─────────────────────────────────────────
-      - name: "contact"
-        label: "📬 Contact / Footer"
-        file: "data/content.json"
-        fields:
-          - { label: "Contact Heading",  name: contact-head,  widget: text }
-          - { label: "Contact Email",    name: contact-email, widget: string }
-          - { label: "Footer Col 1 Title", name: foot-1-title, widget: string }
-          - { label: "Footer Col 1 Link 1", name: foot-1-l1, widget: string }
-          - { label: "Footer Col 1 Link 2", name: foot-1-l2, widget: string }
-          - { label: "Footer Col 1 Link 3", name: foot-1-l3, widget: string }
-          - { label: "Footer Col 2 Title", name: foot-2-title, widget: string }
-          - { label: "Footer Col 2 Link 1", name: foot-2-l1, widget: string }
-          - { label: "Footer Col 2 Link 2", name: foot-2-l2, widget: string }
-          - { label: "Footer Col 2 Link 3", name: foot-2-l3, widget: string }
-          - { label: "Footer Col 3 Title", name: foot-3-title, widget: string }
-          - { label: "Footer Col 3 Body",  name: foot-3-body,  widget: text }
-          - { label: "Footer Col 4 Title", name: foot-4-title, widget: string }
-          - { label: "Footer Col 4 Body",  name: foot-4-body,  widget: text }
-          - { label: "Copyright Line",     name: foot-credit,  widget: string }
-          - { label: "Version Line",       name: foot-version, widget: string }
-
-      # ─────────────────────────────────────────
-      - name: "nav"
-        label: "🧭 Navigation"
-        file: "data/content.json"
-        fields:
-          - { label: "Nav Item 1", name: nav-1, widget: string }
-          - { label: "Nav Item 2", name: nav-2, widget: string }
-          - { label: "Nav Item 3", name: nav-3, widget: string }
-          - { label: "Nav Item 4", name: nav-4, widget: string }
-          - { label: "Nav Item 5", name: nav-5, widget: string }
+          # --- CONTACT & FOOTER ---
+          - { label: "Contact Heading", name: "contact-head", widget: "text" }
+          - { label: "Contact Email", name: "contact-email", widget: "string" }
+          - { label: "Footer Col 1 Title", name: "foot-1-title", widget: "string" }
+          - { label: "Footer Col 1 Link 1", name: "foot-1-l1", widget: "string" }
+          - { label: "Footer Col 1 Link 2", name: "foot-1-l2", widget: "string" }
+          - { label: "Footer Col 1 Link 3", name: "foot-1-l3", widget: "string" }
+          - { label: "Footer Col 2 Title", name: "foot-2-title", widget: "string" }
+          - { label: "Footer Col 2 Link 1", name: "foot-2-l1", widget: "string" }
+          - { label: "Footer Col 2 Link 2", name: "foot-2-l2", widget: "string" }
+          - { label: "Footer Col 2 Link 3", name: "foot-2-l3", widget: "string" }
+          - { label: "Footer Col 3 Title", name: "foot-3-title", widget: "string" }
+          - { label: "Footer Col 3 Body", name: "foot-3-body", widget: "text" }
+          - { label: "Footer Col 4 Title", name: "foot-4-title", widget: "string" }
+          - { label: "Footer Col 4 Body", name: "foot-4-body", widget: "text" }
+          - { label: "Copyright Line", name: "foot-credit", widget: "string" }
+          - { label: "Version Line", name: "foot-version", widget: "string" }
+          
