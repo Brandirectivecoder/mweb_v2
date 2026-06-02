@@ -237,48 +237,50 @@
   })();
 
   /* ---------- CONTACT FORM ---------- */
+/* ---------- CONTACT FORM ---------- */
   (function () {
-  const form = document.getElementById("contact-form");
-  if (!form) return;
-  
-  const ok = document.getElementById("cf-ok");
-  
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+    const form = document.getElementById("contact-form");
+    if (!form) return;
     
-    // 1. Validation (Your original code)
-    const required = form.querySelectorAll("[required]"); 
-    let valid = true;
+    const ok = document.getElementById("cf-ok");
     
-    required.forEach((el) => { 
-      if (!el.value.trim()) { 
-        el.style.borderBottomColor = "var(--accent)"; 
-        valid = false; 
-      } 
-    });
-    
-    if (!valid) { 
-      [...required].find((el) => !el.value.trim())?.focus(); 
-      return; 
-    }
-
-    // 2. Package the data for Netlify
-    const formData = new FormData(form);
-
-    // 3. Send it silently in the background
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString(),
-    })
-      .then(() => {
-        // 4. SUCCESS: Now we show the Thank You message and lock the form
-        if (ok) ok.classList.add("show");
-        form.querySelectorAll("input, select, textarea, button").forEach((el) => el.setAttribute("disabled", "true"));
-      })
-      .catch((error) => {
-        // ERROR: If something fails, alert the user
-        alert("Something went wrong. Please try again.");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      
+      // 1. Validation 
+      const required = form.querySelectorAll("[required]"); 
+      let valid = true;
+      
+      required.forEach((el) => { 
+        if (!el.value.trim()) { 
+          el.style.borderBottomColor = "var(--accent)"; 
+          valid = false; 
+        } 
       });
-  });
-})();
+      
+      if (!valid) { 
+        [...required].find((el) => !el.value.trim())?.focus(); 
+        return; 
+      }
+
+      // 2. Package the data for Netlify
+      const formData = new FormData(form);
+
+      // 3. Send it silently in the background
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      })
+        .then(() => {
+          // 4. SUCCESS: Show the Thank You message and lock the form
+          if (ok) ok.classList.add("show");
+          form.querySelectorAll("input, select, textarea, button").forEach((el) => el.setAttribute("disabled", "true"));
+        })
+        .catch((error) => {
+          // ERROR: Alert the user
+          alert("Something went wrong. Please try again.");
+        });
+    });
+  })(); // <-- Closes the Contact Form function
+})(); // <-- Closes the Master File function (from line 4)
