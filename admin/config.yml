@@ -1,42 +1,75 @@
-{
-  "meta": {
-    "title": "Maulik Gajjar — Director, Tripearlsoft",
-    "desc": "Director of Operations at Tripearlsoft. A decade building brands, websites and apps that convert — from strategy to ship."
-  },
-  "hero": {
-    "title-1": "Building",
-    "title-2": "brands",
-    "title-3": "businesses",
-    "title-4": "that",
-    "title-5": "convert.",
-    "lede": "A decade leading creative and engineering teams to ship <em>websites, brands and apps</em> that earn attention — and pay it back in pipeline.",
-    "status": "Engaged in",
-    "cta-text": "Start a project",
-    "fact-1-val": "Director, Tripearlsoft",
-    "fact-2-val": "Web · Brand · Digital",
-    "fact-3-val": "M.C.A., Ganpat University"
-  },
-  "about": {
-    "copy-1": "I keep <em>strategy, design and engineering</em> moving in one direction —",
-    "copy-2": "so every project finishes <em>louder</em> than it began.",
-    "body-1": "I'm Maulik — Director of Operations at <b>Tripearlsoft</b>, a branding &amp; digital studio in Ahmedabad. I work across websites, brand systems, mobile apps and digital marketing, usually with founders and small teams who need a partner that thinks in roadmaps and executes in pixels.",
-    "body-2": "Three things I won't compromise on: <b>relationships</b> that outlast a single brief, <b>process</b> that respects your time, and <b>numbers</b> at the end of every quarter.",
-    "sig-name": "— Maulik Gajjar",
-    "sig-title": "Director · Operations · since 2016"
-  },
-  "dossier": {
-    "img": "assets/portrait.jpg",
-    "name": "Maulik Gajjar",
-    "based": "Ahmedabad, IN",
-    "role": "Director, Ops",
-    "clearance": "Founder-level"
-  },
-  "prac": {
-    "title": "Five disciplines, <em>one</em> table.",
-    "lead": "Most studios hand you off between specialists. I hold the whole line — so nothing gets lost in the gaps between them.",
-    "1-name": "<em>Web</em> Development",
-    "1-sub": "Landing pages to full commerce — WordPress, custom stacks, performance-first builds that load fast and rank.",
-    "2-name": "<em>Brand</em> Identity",
-    "2-sub": "Logos, systems, guidelines, packaging — the visual language a business runs on for years."
-  }
-}
+backend:
+  name: github
+  repo: Brandirectivecoder/mweb_v2 
+  branch: main 
+
+media_folder: "assets"
+public_folder: "assets"
+
+collections:
+  - name: "homepage"
+    label: "Homepage Content"
+    files:
+      - file: "data/content.json"
+        label: "All Website Content"
+        name: "home"
+        fields:
+          # --- META & SEO ---
+          - name: "meta"
+            label: "SEO Settings"
+            widget: "object"
+            fields:
+              - {label: "Page Title", name: "title", widget: "string"}
+              - {label: "Meta Description", name: "desc", widget: "text"}
+
+          # --- HERO SECTION ---
+          - name: "hero"
+            label: "1. Hero Section"
+            widget: "object"
+            fields:
+              - {label: "Animated Title 1", name: "title-1", widget: "string"}
+              - {label: "Animated Title 2", name: "title-2", widget: "string"}
+              - {label: "Animated Title 3", name: "title-3", widget: "string"}
+              - {label: "Animated Title 4", name: "title-4", widget: "string"}
+              - {label: "Animated Title 5", name: "title-5", widget: "string"}
+              - {label: "Lede Paragraph (Under Title)", name: "lede", widget: "text"}
+              - {label: "Status Label", name: "status", widget: "string"}
+              - {label: "Call to Action Button", name: "cta-text", widget: "string"}
+              - {label: "Fact 1 Value (e.g., Director)", name: "fact-1-val", widget: "string"}
+              - {label: "Fact 2 Value", name: "fact-2-val", widget: "string"}
+              - {label: "Fact 3 Value", name: "fact-3-val", widget: "string"}
+
+          # --- ABOUT SECTION ---
+          - name: "about"
+            label: "2. About Section"
+            widget: "object"
+            fields:
+              - {label: "Large Copy Line 1", name: "copy-1", widget: "string"}
+              - {label: "Large Copy Line 2", name: "copy-2", widget: "string"}
+              - {label: "Body Paragraph 1", name: "body-1", widget: "text"}
+              - {label: "Body Paragraph 2", name: "body-2", widget: "text"}
+              - {label: "Signature Name", name: "sig-name", widget: "string"}
+              - {label: "Signature Title", name: "sig-title", widget: "string"}
+
+          # --- DOSSIER (ID CARD) ---
+          - name: "dossier"
+            label: "3. Dossier ID Card"
+            widget: "object"
+            fields:
+              - {label: "Profile Image", name: "img", widget: "image"}
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Based In", name: "based", widget: "string"}
+              - {label: "Role", name: "role", widget: "string"}
+              - {label: "Clearance Level", name: "clearance", widget: "string"}
+
+          # --- PRACTICE SECTION ---
+          - name: "prac"
+            label: "4. Practice Section"
+            widget: "object"
+            fields:
+              - {label: "Section Title", name: "title", widget: "string"}
+              - {label: "Section Lead Paragraph", name: "lead", widget: "text"}
+              - {label: "Service 1 Name", name: "1-name", widget: "string"}
+              - {label: "Service 1 Subtext", name: "1-sub", widget: "text"}
+              - {label: "Service 2 Name", name: "2-name", widget: "string"}
+              - {label: "Service 2 Subtext", name: "2-sub", widget: "text"}

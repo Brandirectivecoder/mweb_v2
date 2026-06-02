@@ -1,5 +1,42 @@
 {
-  "heroTitle": "This is a test",
-  "heroImage": "assets/your-placeholder-image.jpg",
-  "aboutText": "This text can now be updated from the admin panel."
+  "meta": {
+    "title": "Maulik Gajjar — Director, Tripearlsoft",
+    "desc": "Director of Operations at Tripearlsoft. A decade building brands, websites and apps that convert — from strategy to ship."
+  },
+  "hero": {
+    "title-1": "Building",
+    "title-2": "brands",
+    "title-3": "businesses",
+    "title-4": "that",
+    "title-5": "convert.",
+    "lede": "A decade leading creative and engineering teams to ship <em>websites, brands and apps</em> that earn attention — and pay it back in pipeline.",
+    "status": "Engaged in",
+    "cta-text": "Start a project",
+    "fact-1-val": "Director, Tripearlsoft",
+    "fact-2-val": "Web · Brand · Digital",
+    "fact-3-val": "M.C.A., Ganpat University"
+  },
+  "about": {
+    "copy-1": "I keep <em>strategy, design and engineering</em> moving in one direction —",
+    "copy-2": "so every project finishes <em>louder</em> than it began.",
+    "body-1": "I'm Maulik — Director of Operations at <b>Tripearlsoft</b>, a branding &amp; digital studio in Ahmedabad. I work across websites, brand systems, mobile apps and digital marketing, usually with founders and small teams who need a partner that thinks in roadmaps and executes in pixels.",
+    "body-2": "Three things I won't compromise on: <b>relationships</b> that outlast a single brief, <b>process</b> that respects your time, and <b>numbers</b> at the end of every quarter.",
+    "sig-name": "— Maulik Gajjar",
+    "sig-title": "Director · Operations · since 2016"
+  },
+  "dossier": {
+    "img": "assets/portrait.jpg",
+    "name": "Maulik Gajjar",
+    "based": "Ahmedabad, IN",
+    "role": "Director, Ops",
+    "clearance": "Founder-level"
+  },
+  "prac": {
+    "title": "Five disciplines, <em>one</em> table.",
+    "lead": "Most studios hand you off between specialists. I hold the whole line — so nothing gets lost in the gaps between them.",
+    "1-name": "<em>Web</em> Development",
+    "1-sub": "Landing pages to full commerce — WordPress, custom stacks, performance-first builds that load fast and rank.",
+    "2-name": "<em>Brand</em> Identity",
+    "2-sub": "Logos, systems, guidelines, packaging — the visual language a business runs on for years."
+  }
 }
