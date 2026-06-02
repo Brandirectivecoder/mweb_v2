@@ -1,0 +1,61 @@
+/* =========================================================
+   AWWWARDS LAYER
+   - WebGL hero canvas
+   - Lenis smooth-scroll plumbing
+   - Layout reclaim after removing the deliverable window
+   ========================================================= */
+
+/* ---------- Lenis smooth scroll ---------- */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---------- Hero WebGL canvas ---------- */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-canvas.ready { opacity: 1; }
+
+/* keep the lower-left orb as ambient warmth, dial it back a touch */
+.hero .orb.b { z-index: 0; opacity: 0.32; }
+
+/* the title + meta + bottom must sit ABOVE the canvas (they already use z-index:2) */
+.hero-meta,
+.hero-title,
+.hero-bottom,
+.scroll-hint { position: relative; z-index: 3; }
+
+/* reclaim the space the deliverable window used to occupy */
+.hero-bottom { max-width: 100%; }
+
+/* let the hero title visually overlap the 3D form on the right without clipping */
+.hero-title { mix-blend-mode: normal; }
+
+/* a faint craft grid that fades in over the contact slab — extra polish */
+.contact .grain-lines {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(to right, color-mix(in oklch, var(--bg) 6%, transparent) 1px, transparent 1px);
+  background-size: calc(100% / 6) 100%;
+  opacity: 0.5;
+}
+
+/* marquee gets a scroll-velocity skew driver (on the container — the track's
+   transform is owned by the marquee keyframe animation) */
+.marquee {
+  transform: skewX(var(--mq-skew, 0deg));
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-canvas { transition: none; }
+}

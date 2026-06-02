@@ -1,0 +1,449 @@
+/* =========================================================
+   ENHANCEMENTS — sleek, pro, animated "wow" beats per section
+   ========================================================= */
+
+/* ---------- 1. HERO · live status ticker chip ---------- */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: color-mix(in oklch, var(--ink) 5%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px 8px 12px;
+  font-size: 12px;
+  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+  margin-top: 18px;
+  align-self: flex-start;
+}
+.status-chip .live {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: oklch(0.7 0.16 145);
+  position: relative;
+}
+.status-chip .live::after {
+  content: ""; position: absolute; inset: -4px;
+  border-radius: 50%; background: oklch(0.7 0.16 145);
+  opacity: 0.5; animation: livePulse 1.4s ease-in-out infinite;
+}
+@keyframes livePulse {
+  0% { transform: scale(0.6); opacity: 0.6; }
+  100% { transform: scale(2); opacity: 0; }
+}
+.status-chip .lbl {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.status-chip .rotator {
+  position: relative;
+  display: inline-block;
+  height: 1.2em;
+  overflow: hidden;
+  vertical-align: bottom;
+  min-width: 16ch;
+}
+.status-chip .rotator .item {
+  display: block;
+  transition: transform .6s cubic-bezier(.7,0,.2,1), opacity .4s;
+  color: var(--accent);
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+/* ---------- 2. ABOUT · animated identity card ---------- */
+.id-card {
+  aspect-ratio: 4/5;
+  border-radius: 8px;
+  position: relative; overflow: hidden;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--bg-2), var(--paper));
+  display: flex; flex-direction: column;
+  padding: 22px 22px 18px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: transform .6s cubic-bezier(.2,.6,.2,1), box-shadow .6s;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+.id-card:hover {
+  transform: rotateY(-6deg) rotateX(2deg) translateZ(0);
+  box-shadow: 0 30px 80px -30px color-mix(in oklch, var(--ink) 30%, transparent);
+}
+.id-card .top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.id-card .top .badge {
+  width: 36px; height: 36px;
+  border-radius: 50%; background: var(--accent);
+  display: grid; place-items: center;
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink);
+  letter-spacing: 0;
+  position: relative;
+}
+.id-card .top .badge::after {
+  content: ""; position: absolute; inset: -4px;
+  border: 1px dashed var(--accent); border-radius: 50%;
+  animation: spinSlow 18s linear infinite;
+}
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+.id-card .mug {
+  flex: 1;
+  margin: 18px 0 14px;
+  border-radius: 6px;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 14px, color-mix(in oklch, var(--ink) 6%, transparent) 14px 15px),
+    radial-gradient(circle at 50% 38%, color-mix(in oklch, var(--ink) 25%, transparent), color-mix(in oklch, var(--ink) 8%, transparent) 60%);
+  position: relative;
+  overflow: hidden;
+}
+.id-card .mug::after {
+  /* shimmer scan */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, color-mix(in oklch, var(--accent) 30%, transparent) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%, 50% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.id-card .fields {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px;
+}
+.id-card .fields b { display: block; color: var(--ink-3); font-weight: 400; }
+.id-card .fields span { color: var(--ink); font-family: "Instrument Serif", serif; font-style: italic; font-size: 14px; letter-spacing: 0; text-transform: none; }
+.id-card .strip {
+  margin: 14px -22px -18px;
+  padding: 8px 22px;
+  background: var(--ink);
+  color: var(--bg);
+  display: flex; justify-content: space-between;
+  font-size: 9px;
+}
+.id-card .strip .barcode {
+  display: inline-block;
+  background:
+    repeating-linear-gradient(90deg, var(--bg) 0 1px, transparent 1px 3px, var(--bg) 3px 4px, transparent 4px 6px, var(--bg) 6px 9px);
+  width: 90px; height: 14px;
+}
+
+/* ---------- 3. EXPERTISE · animated glyphs per cell ---------- */
+.cell .glyph {
+  width: 56px; height: 56px;
+  position: relative;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+.cell:hover .glyph { color: var(--ink); }
+.cell .glyph svg { width: 100%; height: 100%; overflow: visible; }
+.cell .glyph svg * {
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+}
+/* draw on enter */
+.cell .glyph svg .stroke {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: glyphDraw 1.4s 0.2s cubic-bezier(.5,0,.3,1) forwards;
+}
+@keyframes glyphDraw { to { stroke-dashoffset: 0; } }
+/* bars chart bounce */
+.cell .glyph .bar {
+  fill: currentColor;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  animation: barRise .6s cubic-bezier(.3,.7,.3,1) forwards;
+}
+@keyframes barRise { to { transform: scaleY(1); } }
+.cell:hover .glyph .bar { animation: barWiggle 1.4s ease-in-out infinite; }
+@keyframes barWiggle {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.55); }
+}
+.cell .glyph .blink {
+  fill: currentColor;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 50% { opacity: 0.25; } }
+
+/* ---------- 4. APPROACH · scroll-linked progress rail ---------- */
+.approach { position: relative; }
+.approach .rail {
+  position: absolute;
+  left: 24px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--line);
+  pointer-events: none;
+}
+.approach .rail .fill {
+  position: absolute;
+  top: 0; left: 0; width: 100%;
+  height: var(--rail, 0%);
+  background: var(--accent);
+  transition: height .15s linear;
+}
+.approach .rail .head {
+  position: absolute;
+  top: var(--rail, 0%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in oklch, var(--accent) 25%, transparent);
+}
+.approach .step { padding-left: 64px; }
+.approach .step .nodot {
+  position: absolute;
+  left: 19px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--line-2);
+  transition: background .4s, border-color .4s, transform .4s;
+}
+.approach .step.in-view .nodot {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-50%) scale(1.2);
+}
+
+/* ---------- 5. WORK · mini browser address bar (typing URL) ---------- */
+.work .card .urlbar {
+  position: absolute;
+  top: 14px; left: 14px; right: 14px;
+  display: flex; align-items: center; gap: 8px;
+  background: color-mix(in oklch, var(--bg) 85%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  color: var(--ink);
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .5s .2s, transform .5s .2s;
+}
+.work .card.in-view .urlbar { opacity: 1; transform: none; }
+.work .card .urlbar .lights {
+  display: flex; gap: 3px;
+}
+.work .card .urlbar .lights span {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--line-2);
+}
+.work .card .urlbar .lights span:nth-child(1) { background: #ff5f57; }
+.work .card .urlbar .lights span:nth-child(2) { background: #febc2e; }
+.work .card .urlbar .lights span:nth-child(3) { background: #28c840; }
+.work .card .urlbar .lock { color: var(--accent); }
+.work .card .urlbar .url {
+  flex: 1; white-space: nowrap; overflow: hidden;
+  color: var(--ink-2);
+}
+.work .card .urlbar .url .typed { color: var(--ink); }
+.work .card .urlbar .url::after {
+  content: ""; display: inline-block;
+  width: 1px; height: 9px; vertical-align: middle;
+  background: var(--ink); margin-left: 2px;
+  animation: caretBlink 1s steps(2) infinite;
+}
+@keyframes caretBlink { 50% { opacity: 0; } }
+.work .card .frame .corner-tag { top: auto; bottom: 14px; left: 14px; }
+
+/* ---------- 6. NUMBERS · slot-machine digit roll ---------- */
+.slot {
+  display: inline-flex;
+  vertical-align: baseline;
+  line-height: 1;
+}
+.slot .col {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: top;
+}
+.slot .col .reel {
+  display: flex; flex-direction: column;
+  transform: translateY(0);
+  transition: transform 1.6s cubic-bezier(.2,.6,.2,1);
+}
+.slot .col .reel span {
+  display: block; height: 1em; line-height: 1;
+}
+.numbers .stat:hover .slot .col .reel {
+  transition-duration: .8s;
+}
+
+/* ---------- 7. VOICES · 3D card stack ---------- */
+.voices .stack {
+  position: relative;
+  height: 280px;
+  perspective: 1200px;
+}
+.voices .vcard {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 32px 36px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 16px 40px -20px color-mix(in oklch, var(--ink) 30%, transparent);
+  transform-style: preserve-3d;
+  transition: transform .8s cubic-bezier(.4,0,.2,1), opacity .6s, filter .6s;
+  cursor: grab;
+}
+.voices .vcard.dragging { transition: none; cursor: grabbing; }
+.voices .vcard .body {
+  font-family: "Instrument Serif", serif;
+  font-size: 26px; line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.voices .vcard .body::first-letter {
+  font-size: 52px; line-height: 0.6; color: var(--accent); margin-right: 6px;
+}
+.voices .vcard .src {
+  display: flex; justify-content: space-between; align-items: end;
+  margin-top: 24px;
+  color: var(--ink-2);
+}
+.voices .vcard .src .who {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.voices .vcard .src .who::before { content: "— "; color: var(--accent); }
+.voices .vcard .src .idx {
+  font-family: "Instrument Serif", serif; font-style: italic;
+  font-size: 24px;
+  color: var(--ink-3);
+}
+.voices .vcard .src .idx b { color: var(--ink); font-style: normal; font-weight: 400; }
+
+/* stack positions: data-pos="0" top, "1" behind, "2" deeper, "3" hidden */
+.voices .vcard[data-pos="0"] { transform: translate3d(0,0,0) scale(1); z-index: 4; }
+.voices .vcard[data-pos="1"] { transform: translate3d(0,16px,0) scale(0.96); z-index: 3; filter: brightness(0.92); }
+.voices .vcard[data-pos="2"] { transform: translate3d(0,32px,0) scale(0.92); z-index: 2; filter: brightness(0.85); }
+.voices .vcard[data-pos="3"] { transform: translate3d(0,48px,0) scale(0.88); z-index: 1; opacity: 0; filter: brightness(0.75); }
+
+.voices .stack-nav {
+  display: flex; gap: 12px; margin-top: 24px;
+  align-items: center;
+}
+.voices .stack-nav .dots {
+  display: flex; gap: 6px;
+  margin-left: auto;
+}
+.voices .stack-nav .dots span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--line-2);
+  transition: background .3s, transform .3s;
+}
+.voices .stack-nav .dots span.on {
+  background: var(--accent);
+  transform: scale(1.4);
+}
+
+/* ---------- 8. SCROLL PROGRESS BAR ---------- */
+.scroll-progress {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 100%;
+  z-index: 200;
+  background: transparent;
+  pointer-events: none;
+}
+.scroll-progress .bar {
+  height: 100%;
+  width: var(--p, 0%);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width .15s linear;
+}
+
+/* ---------- 9. CUSTOM CURSOR (sleek) ---------- */
+.cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
+  top: 0; left: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  transform: translate(var(--cx, 50vw), var(--cy, 50vh)) translate(-50%, -50%) scale(var(--cs, 1));
+  transition: transform .15s cubic-bezier(.2,.6,.2,1), background .25s, border-color .25s, opacity .3s;
+  mix-blend-mode: difference;
+  background: transparent;
+  border-color: #fff;
+  opacity: 0;
+}
+.cursor.ready { opacity: 1; }
+.cursor.hovered { --cs: 2.2; background: #fff; border-color: #fff; }
+@media (hover: none), (max-width: 960px) {
+  .cursor { display: none; }
+}
+
+/* ---------- 10. SUBTLE GRID UNDERLAY (intentional craft cue) ---------- */
+.grid-underlay {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, color-mix(in oklch, var(--ink) 4%, transparent) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%;
+  opacity: 0;
+  transition: opacity .8s;
+}
+.grid-underlay.show { opacity: 0.6; }
+
+/* tighten signature placeholder swap: we replaced .portrait with .id-card */
+.signature .portrait { display: none; }
+
+/* fix work card frame brand mark sizing for tighter scale */
+.work .card .frame .brand-mark { font-size: 56px; }
+
+/* Hero meta — slightly tighter */
+.hero-meta { font-size: 11px; }
+
+@media (max-width: 960px) {
+  .approach .rail { left: 12px; }
+  .approach .step { padding-left: 36px; }
+  .approach .step .nodot { left: 7px; }
+  .voices .stack { height: 320px; }
+  .voices .vcard { padding: 22px 24px; }
+  .voices .vcard .body { font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-chip .live::after, .id-card .mug::after, .id-card .top .badge::after,
+  .cell .glyph svg .stroke, .cell .glyph .bar, .cell .glyph .blink,
+  .work .card .urlbar .url::after { animation: none !important; }
+}
+
+/* style for the next-card button in voices */
+.voices .stack-nav .next-card {
+  background: var(--ink); color: var(--bg);
+  border: none; padding: 12px 22px;
+  border-radius: 999px;
+  font-family: inherit; font-size: 13px;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background .3s, color .3s, transform .3s;
+}
+.voices .stack-nav .next-card:hover { background: var(--accent); color: var(--ink); transform: translateX(4px); }

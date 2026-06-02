@@ -1,0 +1,59 @@
+/* =========================================================
+   CONTACT — closing slab + project brief (primary CTA)
+   ========================================================= */
+.contact { background: var(--ink); color: var(--bg); position: relative; overflow: hidden; padding: clamp(96px,12vw,150px) var(--pad) clamp(40px,5vw,56px); }
+[data-theme="light"] .contact { color: var(--paper); }
+.contact .lines-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: 0.5;
+  background-image: linear-gradient(to right, color-mix(in oklch, var(--bg) 6%, transparent) 1px, transparent 1px);
+  background-size: calc(100% / 6) 100%; }
+.contact .inner { position: relative; z-index: 1; max-width: var(--maxw); margin: 0 auto; }
+.contact .big { font-family: "Instrument Serif", serif; font-size: clamp(48px, 8.5vw, 138px); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 18px; }
+.contact .big em { font-style: italic; color: var(--accent); }
+.contact .big .lh-link { color: inherit; text-decoration: none; position: relative; display: inline-block; }
+.contact .big .lh-link::after { content: ""; position: absolute; left: 0; bottom: 0.06em; height: 2px; width: 100%; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
+.contact .big .lh-link:hover::after { transform: scaleX(1); }
+
+.contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; padding: 30px 0 44px; border-top: 1px solid color-mix(in oklch, var(--bg) 22%, transparent); margin-top: 28px; }
+.contact-form .col-2 { grid-column: span 2; }
+.contact-form .field { display: flex; flex-direction: column; gap: 8px; position: relative; }
+.contact-form label { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in oklch, var(--bg) 60%, transparent); }
+.contact-form label .req { color: var(--accent); }
+.contact-form input, .contact-form select, .contact-form textarea {
+  background: transparent; border: none; border-bottom: 1px solid color-mix(in oklch, var(--bg) 30%, transparent);
+  color: var(--bg); font-family: inherit; font-size: 17px; padding: 6px 0 10px; outline: none; width: 100%;
+  transition: border-color .3s; border-radius: 0;
+}
+[data-theme="light"] .contact-form input, [data-theme="light"] .contact-form select, [data-theme="light"] .contact-form textarea { color: var(--paper); }
+.contact-form select { appearance: none; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 14px) 14px, calc(100% - 8px) 14px; background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
+.contact-form select option { background: var(--ink); color: var(--bg); }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: color-mix(in oklch, var(--bg) 35%, transparent); }
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--accent); }
+.contact-form textarea { resize: none; min-height: 88px; line-height: 1.4; }
+.contact-form .submit { grid-column: span 2; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 12px; }
+.contact-form .submit .fine { font-size: 12px; color: color-mix(in oklch, var(--bg) 55%, transparent); max-width: 50ch; }
+.contact-form button[type="submit"] { background: var(--accent); color: var(--accent-ink); border: none; padding: 18px 32px; border-radius: 999px; font-family: inherit; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; transition: transform .3s, background .3s; }
+.contact-form button[type="submit"]:hover { background: var(--bg); color: var(--ink); transform: translateX(4px); }
+.contact-form button[type="submit"] .arr { display: inline-block; transition: transform .4s var(--ease); }
+.contact-form button[type="submit"]:hover .arr { transform: rotate(-45deg); }
+.contact-form .ok-msg { grid-column: span 2; background: color-mix(in oklch, var(--accent) 20%, transparent); border: 1px solid var(--accent); padding: 18px 22px; border-radius: 8px; display: none; align-items: center; gap: 14px; color: var(--bg); }
+[data-theme="light"] .contact-form .ok-msg { color: var(--ink); }
+.contact-form .ok-msg.show { display: flex; }
+.contact-form .ok-msg .check { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+
+.contact .grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 36px; padding-top: 56px; border-top: 1px solid color-mix(in oklch, var(--bg) 25%, transparent); }
+.contact .grid h5 { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in oklch, var(--bg) 60%, transparent); margin-bottom: 16px; font-weight: 400; }
+.contact .grid a { color: var(--bg); text-decoration: none; display: block; margin-bottom: 8px; font-size: 17px; transition: color .3s, transform .3s; }
+[data-theme="light"] .contact .grid a { color: var(--paper); }
+.contact .grid a:hover { color: var(--accent); transform: translateX(4px); }
+.contact .grid p { font-size: 16px; color: color-mix(in oklch, var(--bg) 75%, transparent); }
+.contact .credit { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; margin-top: 56px; border-top: 1px solid color-mix(in oklch, var(--bg) 25%, transparent); color: color-mix(in oklch, var(--bg) 60%, transparent); flex-wrap: wrap; gap: 12px; }
+.contact .credit .clock { font-variant-numeric: tabular-nums; }
+
+@media (max-width: 760px) {
+  .contact-form { grid-template-columns: 1fr; }
+  .contact-form .col-2, .contact-form .submit { grid-column: span 1; }
+  .contact-form .submit { flex-direction: column; align-items: flex-start; }
+  .contact .grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+}

@@ -1,0 +1,565 @@
+/* =========================================================
+   DELIVERABLE — Pinned mini-window that updates per section.
+   Reads as a live build of a website happening in front of you.
+   ========================================================= */
+
+.deliverable {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 360px;
+  height: 240px;
+  z-index: 60;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--ink) 5%, transparent),
+    0 20px 50px -10px color-mix(in oklch, var(--ink) 30%, transparent),
+    0 40px 100px -30px color-mix(in oklch, var(--ink) 25%, transparent);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  font-size: 12px;
+  transition: transform .6s cubic-bezier(.7,0,.2,1), opacity .4s;
+  transform: translateY(0);
+}
+.deliverable.minimized { transform: translateY(calc(100% - 32px)); }
+
+/* ---------- Chrome ---------- */
+.del-chrome {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 14px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.del-lights { display: flex; gap: 6px; }
+.del-lights span {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--line-2);
+}
+.del-lights span:nth-child(1) { background: #ff5f57; }
+.del-lights span:nth-child(2) { background: #febc2e; }
+.del-lights span:nth-child(3) { background: #28c840; }
+.del-url {
+  flex: 1;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 4px 10px;
+  display: flex; align-items: center; gap: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--ink-2);
+  min-width: 0;
+}
+.del-url .pad { color: var(--accent); }
+.del-url .url {
+  white-space: nowrap; overflow: hidden;
+  flex: 1;
+}
+.del-url .url::after {
+  content: ""; display: inline-block;
+  width: 1px; height: 10px;
+  background: currentColor;
+  margin-left: 2px;
+  animation: caret 1s steps(2) infinite;
+}
+@keyframes caret { 50% { opacity: 0; } }
+.del-actions {
+  color: var(--ink-3);
+  cursor: pointer;
+  padding: 0 4px;
+  font-size: 14px;
+  user-select: none;
+}
+.del-actions:hover { color: var(--ink); }
+
+/* ---------- Body / scenes ---------- */
+.del-body {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+.scene {
+  position: absolute; inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s ease;
+  padding: 14px;
+  display: flex; flex-direction: column;
+  gap: 8px;
+}
+.scene.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------- Status bar ---------- */
+.del-statusbar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 14px;
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+.del-statusbar .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.del-statusbar .label { flex: 1; text-transform: uppercase; }
+.del-statusbar .time { color: var(--ink-2); }
+
+/* =========================================================
+   SCENE 01 · HERO — booting / URL typing
+   ========================================================= */
+.scene-hero { justify-content: center; align-items: center; }
+.scene-hero .boot {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--ink-2);
+  text-align: left;
+  width: 100%;
+}
+.scene-hero .boot .line { opacity: 0; }
+.scene-hero.active .boot .line {
+  animation: bootLine .4s forwards;
+}
+.scene-hero.active .boot .line:nth-child(1) { animation-delay: .1s; }
+.scene-hero.active .boot .line:nth-child(2) { animation-delay: .5s; }
+.scene-hero.active .boot .line:nth-child(3) { animation-delay: .9s; }
+.scene-hero.active .boot .line:nth-child(4) { animation-delay: 1.4s; }
+.scene-hero.active .boot .line:nth-child(5) { animation-delay: 2.2s; }
+@keyframes bootLine { to { opacity: 1; } }
+.scene-hero .boot .ok { color: var(--accent); }
+.scene-hero .boot .arrow { color: var(--accent); }
+
+/* =========================================================
+   SCENE 02 · WIREFRAME — sketch drawing in
+   ========================================================= */
+.scene-wireframe svg { width: 100%; height: 100%; }
+.scene-wireframe rect, .scene-wireframe line, .scene-wireframe path {
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  fill: none;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+}
+.scene-wireframe.active rect,
+.scene-wireframe.active line,
+.scene-wireframe.active path {
+  animation: drawIn 1.4s forwards cubic-bezier(.5,0,.3,1);
+}
+.scene-wireframe.active [data-d="1"] { animation-delay: 0s; }
+.scene-wireframe.active [data-d="2"] { animation-delay: .15s; }
+.scene-wireframe.active [data-d="3"] { animation-delay: .3s; }
+.scene-wireframe.active [data-d="4"] { animation-delay: .45s; }
+.scene-wireframe.active [data-d="5"] { animation-delay: .6s; }
+.scene-wireframe.active [data-d="6"] { animation-delay: .75s; }
+@keyframes drawIn { to { stroke-dashoffset: 0; } }
+
+/* =========================================================
+   SCENE 03 · ABOUT — UI fills in
+   ========================================================= */
+.scene-ui { gap: 6px; padding: 14px; }
+.scene-ui .bar {
+  height: 8px; border-radius: 3px;
+  background: color-mix(in oklch, var(--ink) 12%, transparent);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .5s, transform .5s;
+}
+.scene-ui.active .bar { opacity: 1; transform: none; }
+.scene-ui.active .bar:nth-child(1) { transition-delay: .05s; width: 40%; height: 16px; }
+.scene-ui.active .bar:nth-child(2) { transition-delay: .15s; width: 90%; }
+.scene-ui.active .bar:nth-child(3) { transition-delay: .25s; width: 75%; }
+.scene-ui.active .bar:nth-child(4) { transition-delay: .35s; width: 85%; }
+.scene-ui.active .bar:nth-child(5) { transition-delay: .45s; width: 30%; background: var(--accent); height: 24px; border-radius: 99px; }
+.scene-ui .row { display: flex; gap: 6px; margin-top: 6px; }
+.scene-ui .row .card {
+  flex: 1; height: 56px; border-radius: 4px;
+  background: color-mix(in oklch, var(--ink) 8%, transparent);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .5s, transform .5s;
+}
+.scene-ui.active .row .card { opacity: 1; transform: none; }
+.scene-ui.active .row .card:nth-child(1) { transition-delay: .55s; }
+.scene-ui.active .row .card:nth-child(2) { transition-delay: .65s; background: color-mix(in oklch, var(--accent) 30%, transparent); }
+.scene-ui.active .row .card:nth-child(3) { transition-delay: .75s; }
+
+/* =========================================================
+   SCENE 04 · EXPERTISE — 5 panels light up
+   ========================================================= */
+.scene-panels { padding: 0; }
+.scene-panels .grid {
+  flex: 1;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  width: 100%; height: 100%;
+}
+.scene-panels .panel {
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 12px 8px;
+  position: relative;
+  overflow: hidden;
+}
+.scene-panels .panel:last-child { border-right: none; }
+.scene-panels .panel::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity .5s;
+}
+.scene-panels.active .panel.lit::before { opacity: 1; animation: panelLitCycle 5s linear infinite; }
+@keyframes panelLitCycle { 0%, 100% { opacity: 0.05; } 50% { opacity: 0.18; } }
+.scene-panels .panel .ico {
+  width: 18px; height: 18px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  position: relative; z-index: 1;
+}
+.scene-panels .panel .ico.circle { border-radius: 50%; }
+.scene-panels .panel .ico.tri { border: none; width: 0; height: 0; border-left: 9px solid transparent; border-right: 9px solid transparent; border-bottom: 16px solid currentColor; }
+.scene-panels .panel .ico.dash { border-style: dashed; }
+.scene-panels .panel .lbl {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  position: relative; z-index: 1;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* =========================================================
+   SCENE 05 · APPROACH — DevTools network panel
+   ========================================================= */
+.scene-net { padding: 0; gap: 0; }
+.scene-net .tabs {
+  display: flex; gap: 0;
+  padding: 6px 10px 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+}
+.scene-net .tabs span {
+  padding: 5px 10px; color: var(--ink-3); border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
+}
+.scene-net .tabs span.on { color: var(--ink); border-bottom-color: var(--accent); }
+.scene-net .rows {
+  flex: 1; display: flex; flex-direction: column;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  overflow: hidden;
+  padding: 4px 10px;
+}
+.scene-net .row {
+  display: grid; grid-template-columns: 1.4fr 0.5fr 0.6fr 0.5fr;
+  gap: 8px;
+  padding: 3px 0;
+  border-bottom: 1px dashed var(--line);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .35s, transform .35s;
+  color: var(--ink-2);
+}
+.scene-net .row .m { color: var(--accent); }
+.scene-net .row .s.ok { color: oklch(0.7 0.16 145); }
+.scene-net.active .row { opacity: 1; transform: none; }
+.scene-net.active .row:nth-child(1) { transition-delay: .05s; }
+.scene-net.active .row:nth-child(2) { transition-delay: .25s; }
+.scene-net.active .row:nth-child(3) { transition-delay: .45s; }
+.scene-net.active .row:nth-child(4) { transition-delay: .65s; }
+.scene-net.active .row:nth-child(5) { transition-delay: .85s; }
+.scene-net.active .row:nth-child(6) { transition-delay: 1.05s; }
+
+/* =========================================================
+   SCENE 06 · WORK — case study slideshow
+   ========================================================= */
+.scene-work { padding: 0; gap: 0; }
+.scene-work .stage {
+  position: relative; flex: 1; overflow: hidden;
+}
+.scene-work .slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity .8s;
+  background:
+    radial-gradient(circle at 30% 20%, color-mix(in oklch, var(--accent) 60%, transparent), transparent 55%),
+    radial-gradient(circle at 70% 80%, color-mix(in oklch, var(--accent-2) 60%, transparent), transparent 55%),
+    var(--bg-2);
+}
+.scene-work .slide.on { opacity: 1; }
+.scene-work .slide .tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  align-self: flex-start;
+  background: var(--ink); color: var(--bg);
+  padding: 3px 7px; border-radius: 3px;
+}
+.scene-work .slide .name {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+}
+.scene-work .slide .sub {
+  font-size: 11px; color: var(--ink-2);
+  margin-top: 4px;
+}
+
+/* =========================================================
+   SCENE 07 · NUMBERS — Lighthouse gauges
+   ========================================================= */
+.scene-gauges { padding: 14px; }
+.scene-gauges .gs {
+  flex: 1;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+.gauge {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.gauge svg { width: 56px; height: 56px; transform: rotate(-90deg); }
+.gauge svg circle { fill: none; stroke-width: 4; }
+.gauge svg .track-c { stroke: color-mix(in oklch, var(--ink) 12%, transparent); }
+.gauge svg .fill-c {
+  stroke: oklch(0.7 0.16 145);
+  stroke-linecap: round;
+  stroke-dasharray: 138;
+  stroke-dashoffset: 138;
+  transition: stroke-dashoffset 1.4s cubic-bezier(.5,0,.2,1);
+}
+.scene-gauges.active .gauge .fill-c { stroke-dashoffset: 0; }
+.gauge .v {
+  position: absolute;
+  font-family: "Instrument Serif", serif;
+  font-size: 22px;
+  margin-top: -2px;
+}
+.gauge .wrap { position: relative; display: grid; place-items: center; }
+.gauge .l {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 8px; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-align: center;
+}
+
+/* =========================================================
+   SCENE 08 · VOICES — comment thread
+   ========================================================= */
+.scene-voices { gap: 8px; }
+.scene-voices .comment {
+  display: flex; gap: 10px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .45s, transform .45s;
+}
+.scene-voices.active .comment { opacity: 1; transform: none; }
+.scene-voices.active .comment:nth-child(1) { transition-delay: .1s; }
+.scene-voices.active .comment:nth-child(2) { transition-delay: .45s; }
+.scene-voices.active .comment:nth-child(3) { transition-delay: .8s; }
+.scene-voices .avatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0;
+  display: grid; place-items: center;
+  font-family: "Instrument Serif", serif;
+  font-size: 11px; color: var(--ink);
+}
+.scene-voices .avatar.b { background: var(--accent-2); }
+.scene-voices .avatar.c { background: color-mix(in oklch, var(--ink) 15%, transparent); color: var(--ink-2); }
+.scene-voices .bubble {
+  flex: 1;
+  background: var(--bg-2);
+  padding: 6px 10px;
+  border-radius: 4px 8px 8px 8px;
+  font-size: 10.5px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.scene-voices .bubble b {
+  display: block; font-size: 9px;
+  color: var(--ink-2);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+/* =========================================================
+   SCENE 09 · CONTACT — Mini Calendly
+   ========================================================= */
+.scene-cal { padding: 12px; gap: 8px; }
+.scene-cal .head {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.scene-cal .head b { color: var(--ink); font-weight: 500; }
+.scene-cal .head .nav { display: flex; gap: 6px; }
+.scene-cal .head .nav span { padding: 0 4px; cursor: pointer; }
+.scene-cal .days {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9.5px;
+}
+.scene-cal .days .dow { color: var(--ink-3); text-align: center; padding: 2px 0; }
+.scene-cal .days .d {
+  aspect-ratio: 1;
+  display: grid; place-items: center;
+  border-radius: 3px;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background .25s, color .25s;
+}
+.scene-cal .days .d:hover { background: var(--bg-2); color: var(--ink); }
+.scene-cal .days .d.off { color: var(--ink-3); opacity: 0.35; }
+.scene-cal .days .d.sel { background: var(--accent); color: var(--ink); font-weight: 500; }
+.scene-cal .pill {
+  margin-top: auto;
+  background: var(--ink); color: var(--bg);
+  padding: 6px 10px; border-radius: 99px;
+  font-size: 10px; letter-spacing: 0.04em;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 720px) {
+  .deliverable {
+    width: calc(100vw - 32px);
+    right: 16px; bottom: 16px;
+    height: 200px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scene *, .gauge svg .fill-c { animation: none !important; transition: none !important; }
+}
+
+/* =========================================================
+   CONTACT FORM
+   ========================================================= */
+.contact-form {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px;
+  padding: 28px 0 40px;
+  border-top: 1px solid color-mix(in oklch, var(--bg) 22%, transparent);
+  margin-top: 24px;
+}
+.contact-form .col-2 { grid-column: span 2; }
+.contact-form .field {
+  display: flex; flex-direction: column; gap: 8px;
+  position: relative;
+}
+.contact-form label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in oklch, var(--bg) 60%, transparent);
+}
+.contact-form label .req { color: var(--accent); }
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid color-mix(in oklch, var(--bg) 30%, transparent);
+  color: var(--bg);
+  font-family: inherit;
+  font-size: 17px;
+  padding: 6px 0 10px;
+  outline: none;
+  width: 100%;
+  transition: border-color .3s;
+  border-radius: 0;
+}
+.contact-form select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 14px) 14px, calc(100% - 8px) 14px;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.contact-form select option { background: var(--ink); color: var(--bg); }
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: color-mix(in oklch, var(--bg) 35%, transparent); }
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus { border-color: var(--accent); }
+.contact-form textarea {
+  resize: none;
+  min-height: 88px;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.contact-form .submit {
+  grid-column: span 2;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+}
+.contact-form .submit .fine {
+  font-size: 12px;
+  color: color-mix(in oklch, var(--bg) 55%, transparent);
+  max-width: 50ch;
+}
+.contact-form button[type="submit"] {
+  background: var(--accent);
+  color: var(--ink);
+  border: none;
+  padding: 18px 32px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 12px;
+  transition: transform .3s, background .3s;
+}
+.contact-form button[type="submit"]:hover { background: var(--bg); color: var(--ink); transform: translateX(4px); }
+.contact-form button[type="submit"] .arr {
+  display: inline-block;
+  transition: transform .4s cubic-bezier(.7,0,.2,1);
+}
+.contact-form button[type="submit"]:hover .arr { transform: rotate(-45deg); }
+.contact-form .ok-msg {
+  grid-column: span 2;
+  background: color-mix(in oklch, var(--accent) 20%, transparent);
+  border: 1px solid var(--accent);
+  padding: 18px 22px;
+  border-radius: 8px;
+  display: none;
+  align-items: center; gap: 14px;
+  color: var(--bg);
+}
+.contact-form .ok-msg.show { display: flex; }
+.contact-form .ok-msg .check {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent); color: var(--ink);
+  display: grid; place-items: center;
+  font-size: 14px; font-weight: 700;
+  flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .contact-form { grid-template-columns: 1fr; }
+  .contact-form .col-2 { grid-column: span 1; }
+  .contact-form .submit { grid-column: span 1; flex-direction: column; align-items: flex-start; }
+}
