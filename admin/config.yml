@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: https://github.com/Brandirectivecoder/mweb_v2 
+  repo: Brandirectivecoder/mweb_v2 
   branch: main 
 
 # Pointing the CMS to your existing assets folder
