@@ -3,7 +3,6 @@ backend:
   repo: Brandirectivecoder/mweb_v2 
   branch: main 
 
-# Pointing the CMS to your existing assets folder
 media_folder: "assets"
 public_folder: "assets"
 
@@ -12,9 +11,65 @@ collections:
     label: "Homepage Content"
     files:
       - file: "data/content.json"
-        label: "Homepage Info"
+        label: "All Website Content"
         name: "home"
         fields:
-          - {label: "Hero Headline", name: "heroTitle", widget: "string"}
-          - {label: "Hero Image", name: "heroImage", widget: "image"}
-          - {label: "About Section text", name: "aboutText", widget: "text"}
+          # --- META & SEO ---
+          - name: "meta"
+            label: "SEO Settings"
+            widget: "object"
+            fields:
+              - {label: "Page Title", name: "title", widget: "string"}
+              - {label: "Meta Description", name: "desc", widget: "text"}
+
+          # --- HERO SECTION ---
+          - name: "hero"
+            label: "1. Hero Section"
+            widget: "object"
+            fields:
+              - {label: "Animated Title 1", name: "title-1", widget: "string"}
+              - {label: "Animated Title 2", name: "title-2", widget: "string"}
+              - {label: "Animated Title 3", name: "title-3", widget: "string"}
+              - {label: "Animated Title 4", name: "title-4", widget: "string"}
+              - {label: "Animated Title 5", name: "title-5", widget: "string"}
+              - {label: "Lede Paragraph (Under Title)", name: "lede", widget: "text"}
+              - {label: "Status Label", name: "status", widget: "string"}
+              - {label: "Call to Action Button", name: "cta-text", widget: "string"}
+              - {label: "Fact 1 Value (e.g., Director)", name: "fact-1-val", widget: "string"}
+              - {label: "Fact 2 Value", name: "fact-2-val", widget: "string"}
+              - {label: "Fact 3 Value", name: "fact-3-val", widget: "string"}
+
+          # --- ABOUT SECTION ---
+          - name: "about"
+            label: "2. About Section"
+            widget: "object"
+            fields:
+              - {label: "Large Copy Line 1", name: "copy-1", widget: "string"}
+              - {label: "Large Copy Line 2", name: "copy-2", widget: "string"}
+              - {label: "Body Paragraph 1", name: "body-1", widget: "text"}
+              - {label: "Body Paragraph 2", name: "body-2", widget: "text"}
+              - {label: "Signature Name", name: "sig-name", widget: "string"}
+              - {label: "Signature Title", name: "sig-title", widget: "string"}
+
+          # --- DOSSIER (ID CARD) ---
+          - name: "dossier"
+            label: "3. Dossier ID Card"
+            widget: "object"
+            fields:
+              - {label: "Profile Image", name: "img", widget: "image"}
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Based In", name: "based", widget: "string"}
+              - {label: "Role", name: "role", widget: "string"}
+              - {label: "Clearance Level", name: "clearance", widget: "string"}
+
+          # --- PRACTICE SECTION ---
+          - name: "prac"
+            label: "4. Practice Section"
+            widget: "object"
+            fields:
+              - {label: "Section Title", name: "title", widget: "string"}
+              - {label: "Section Lead Paragraph", name: "lead", widget: "text"}
+              - {label: "Service 1 Name", name: "1-name", widget: "string"}
+              - {label: "Service 1 Subtext", name: "1-sub", widget: "text"}
+              - {label: "Service 2 Name", name: "2-name", widget: "string"}
+              - {label: "Service 2 Subtext", name: "2-sub", widget: "text"}
