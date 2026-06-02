@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: your-username/your-repo-name 
+  repo: https://github.com/Brandirectivecoder/mweb_v2 
   branch: main 
 
 # Pointing the CMS to your existing assets folder
@@ -18,4 +18,3 @@ collections:
           - {label: "Hero Headline", name: "heroTitle", widget: "string"}
           - {label: "Hero Image", name: "heroImage", widget: "image"}
           - {label: "About Section text", name: "aboutText", widget: "text"}
-          
