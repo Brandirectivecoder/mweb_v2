@@ -1,13 +1,11 @@
 {
   "meta-title": "Maulik Gajjar — Director, Tripearlsoft",
   "meta-desc": "Director of Operations at Tripearlsoft. A decade building brands, websites and apps that convert — from strategy to ship.",
-
   "nav-1": "About",
   "nav-2": "Practice",
   "nav-3": "Process",
   "nav-4": "Work",
   "nav-5": "Contact",
-
   "hero-title-1": "Building",
   "hero-title-2": "brands",
   "hero-title-3": "businesses",
@@ -28,7 +26,6 @@
   "hero-fact-3-val": "M.C.A., Ganpat University",
   "hero-fact-4-lbl": "Reach",
   "hero-fact-4-val": "India · UK · US · AU",
-
   "about-tag": "01 — The Operator",
   "about-copy-1": "I keep <em>strategy, design and engineering</em> moving in one direction —",
   "about-copy-2": "so every project finishes <em>louder</em> than it began.",
@@ -44,7 +41,6 @@
   "dossier-role": "Director, Ops",
   "dossier-clearance": "Founder-level",
   "dossier-strip": "TRIPEARLSOFT · DIRECTOR",
-
   "prac-tag": "02 — The Practice",
   "prac-title": "Five disciplines, <em>one</em> table.",
   "prac-lead": "Most studios hand you off between specialists. I hold the whole line — so nothing gets lost in the gaps between them.",
@@ -58,7 +54,6 @@
   "prac-4-sub": "SEO, paid media, social &amp; email — measurable channels with reporting that doesn't lie.",
   "prac-5-name": "<em>Strategy</em> &amp; Ops",
   "prac-5-sub": "Scope, schedule, QA and handover — the unglamorous half of design that decides whether you ship.",
-
   "proc-tag": "03 — The Method",
   "proc-title": "How good work <em>actually</em> gets made.",
   "proc-lead": "No black box. Five stages — scroll to fly through them ✈",
@@ -77,7 +72,6 @@
   "proc-5-title": "Compound.",
   "proc-5-desc": "The first 90 days decide everything. We stay on, measure and iterate — turning a launch into a growth flywheel.",
   "proc-5-tag": "Growth · ongoing",
-
   "work-tag": "04 — Selected Work",
   "work-title": "Built with — and <em>for</em> — operators.",
   "work-1-ix": "01 / 05 — COMMERCE",
@@ -116,7 +110,6 @@
   "more-2-sub": "Booking · patient portal · content",
   "more-3-title": "D2C launch",
   "more-3-sub": "Brand → store → paid in 6 weeks",
-
   "proof-tag": "05 — By the numbers",
   "proof-title": "A record you can <em>audit.</em>",
   "proof-1-val": "55",
@@ -131,7 +124,6 @@
   "proof-4-val": "4.9",
   "proof-4-sym": "★",
   "proof-4-lbl": "<b>Average satisfaction</b> across active engagements.",
-
   "voice-tag": "06 — Voices",
   "voice-title": "What clients <em>actually</em> say.",
   "voice-lead": "Drag the stack, or let it run.",
@@ -143,7 +135,6 @@
   "voice-3-who": "Operator — Healthcare",
   "voice-4-body": "A leader interested not only in company growth but his team's — going above and beyond researching strategies to ensure clients succeed.",
   "voice-4-who": "Former Manager",
-
   "contact-head": "Got a brief?<br /><em>Let's talk —</em>",
   "contact-email": "info@tripearlsoft.com",
   "foot-1-title": "Direct",
@@ -159,5 +150,5 @@
   "foot-4-title": "Hours",
   "foot-4-body": "Mon — Fri, 10:00 — 19:00 IST<br />By appointment on weekends",
   "foot-credit": "© Maulik Gajjar · 2026",
-  "foot-version": "v2.0 — Operator"
+  "foot-version": "Developed by: Jason the developer"
 }
