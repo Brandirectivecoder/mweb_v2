@@ -1,5 +1,5 @@
 backend:
-  name: git-gateway
+  name: git-gatewayrepo: Brandirectivecoder/mweb_v2
   branch: main
 
 media_folder: assets
@@ -221,4 +221,3 @@ collections:
           - { label: "Nav Item 3", name: nav-3, widget: string }
           - { label: "Nav Item 4", name: nav-4, widget: string }
           - { label: "Nav Item 5", name: nav-5, widget: string }
-          
