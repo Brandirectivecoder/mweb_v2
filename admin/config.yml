@@ -1,0 +1,21 @@
+backend:
+  name: github
+  repo: your-username/your-repo-name 
+  branch: main 
+
+# Pointing the CMS to your existing assets folder
+media_folder: "assets"
+public_folder: "assets"
+
+collections:
+  - name: "homepage"
+    label: "Homepage Content"
+    files:
+      - file: "data/content.json"
+        label: "Homepage Info"
+        name: "home"
+        fields:
+          - {label: "Hero Headline", name: "heroTitle", widget: "string"}
+          - {label: "Hero Image", name: "heroImage", widget: "image"}
+          - {label: "About Section text", name: "aboutText", widget: "text"}
+          
