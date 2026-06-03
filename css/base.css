@@ -339,5 +339,80 @@ section { position: relative; z-index: 1; }
     display: none;
 }
 
+/* =========================================================
+   MOBILE RESPONSIVE FIXES (Screens 768px and smaller)
+   ========================================================= */
+@media (max-width: 768px) {
+  
+  /* --- 1. NAVIGATION FIX --- */
+  .nav {
+    flex-wrap: wrap; /* Allows the links to drop to a new line */
+    padding: 15px 20px;
+    gap: 15px;
+  }
+  
+  .nav .brand {
+    flex-grow: 1; /* Pushes the theme toggle to the right */
+  }
+
+  .nav .links {
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto; /* Allows horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    padding-bottom: 10px; /* Space for invisible scrollbar */
+    gap: 20px;
+  }
+  
+  /* Hides the ugly scrollbar but keeps the scroll functionality */
+  .nav .links::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* --- 2. HERO META FIX --- */
+  .hero-meta {
+    flex-direction: column; /* Stacks the top info rows vertically */
+    gap: 5px;
+    align-items: flex-start;
+    padding: 0 20px;
+  }
+
+  .hero-meta .row {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  /* --- 3. HERO TYPOGRAPHY FIX --- */
+  /* Scales the giant headline down so it fits on a phone screen */
+  .hero-title {
+    font-size: 14vw; 
+    line-height: 1.1;
+    padding: 0 20px;
+  }
+  
+  .hero-title .word.small {
+    font-size: 8vw;
+  }
+
+  .hero-title .star {
+    font-size: 10vw;
+  }
+
+  /* --- 4. HERO BOTTOM FIX --- */
+  .hero-bottom {
+    flex-direction: column; /* Stacks the paragraph and the facts */
+    gap: 40px;
+    padding: 0 20px;
+  }
+
+  .hero-bottom .lede-col {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .hero-bottom .facts {
+    width: 100%;
+  }
+}
 
 
