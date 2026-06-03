@@ -242,13 +242,8 @@
     const form = document.getElementById("contact-form");
     if (!form) return;
     
-    const ok = document.getElementById("cf-ok");
-    const submitBtn = form.querySelector('button[type="submit"]');
-    
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      
-      // 1. Validation (Keeps your custom UI highlights)
+    form.addEventListener("submit", (e) => {
+      // 1. Run your custom UI validation
       const required = form.querySelectorAll("[required]"); 
       let valid = true;
       
@@ -259,47 +254,16 @@
         } 
       });
       
+      // 2. If fields are missing, STOP the form from sending
       if (!valid) { 
+        e.preventDefault(); // This stops the HTML action
         [...required].find((el) => !el.value.trim())?.focus(); 
         return; 
       }
 
-      // 2. Package the data & Add your Web3Forms Key
-      const formData = new FormData(form);
-      formData.append("access_key", "08c82bb6-790f-4b51-9693-f66327c701cc");
-
-      // Change button text and disable form while sending
-      const originalText = submitBtn ? submitBtn.textContent : "Send";
+      // 3. If valid, just change the button text and let the HTML take over!
+      const submitBtn = form.querySelector('button[type="submit"]');
       if (submitBtn) submitBtn.textContent = "Sending...";
-      form.querySelectorAll("input, select, textarea, button").forEach((el) => el.setAttribute("disabled", "true"));
-
-      // 3. Send it to Web3Forms API
-      try {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: formData
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          // 4. SUCCESS: Show your custom dynamic CMS Thank You message
-          if (ok) ok.classList.add("show");
-          if (submitBtn) submitBtn.textContent = "Sent!";
-          form.reset();
-        } else {
-          // Web3Forms API Error
-          alert("Error: " + data.message);
-          // Re-enable form so user can try again
-          form.querySelectorAll("input, select, textarea, button").forEach((el) => el.removeAttribute("disabled"));
-          if (submitBtn) submitBtn.textContent = originalText;
-        }
-      } catch (error) {
-        alert("Something went wrong. Please check your connection and try again.");
-        // Re-enable form so user can try again
-        form.querySelectorAll("input, select, textarea, button").forEach((el) => el.removeAttribute("disabled"));
-        if (submitBtn) submitBtn.textContent = originalText;
-      }
     });
   })();
-})();
+  })();
