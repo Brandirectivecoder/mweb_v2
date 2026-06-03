@@ -236,18 +236,19 @@
     setInterval(advance, 6000);
   })();
 
-  /* ---------- CONTACT FORM ---------- */
+/* ---------- CONTACT FORM ---------- */
 /* ---------- CONTACT FORM ---------- */
   (function () {
     const form = document.getElementById("contact-form");
     if (!form) return;
     
     const ok = document.getElementById("cf-ok");
+    const submitBtn = form.querySelector('button[type="submit"]');
     
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       
-      // 1. Validation 
+      // 1. Validation (Keeps your custom UI highlights)
       const required = form.querySelectorAll("[required]"); 
       let valid = true;
       
@@ -263,24 +264,42 @@
         return; 
       }
 
-      // 2. Package the data for Netlify
+      // 2. Package the data & Add your Web3Forms Key
       const formData = new FormData(form);
+      formData.append("access_key", "08c82bb6-790f-4b51-9693-f66327c701cc");
 
-      // 3. Send it silently in the background
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString(),
-      })
-        .then(() => {
-          // 4. SUCCESS: Show the Thank You message and lock the form
-          if (ok) ok.classList.add("show");
-          form.querySelectorAll("input, select, textarea, button").forEach((el) => el.setAttribute("disabled", "true"));
-        })
-        .catch((error) => {
-          // ERROR: Alert the user
-          alert("Something went wrong. Please try again.");
+      // Change button text and disable form while sending
+      const originalText = submitBtn ? submitBtn.textContent : "Send";
+      if (submitBtn) submitBtn.textContent = "Sending...";
+      form.querySelectorAll("input, select, textarea, button").forEach((el) => el.setAttribute("disabled", "true"));
+
+      // 3. Send it to Web3Forms API
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
         });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // 4. SUCCESS: Show your custom dynamic CMS Thank You message
+          if (ok) ok.classList.add("show");
+          if (submitBtn) submitBtn.textContent = "Sent!";
+          form.reset();
+        } else {
+          // Web3Forms API Error
+          alert("Error: " + data.message);
+          // Re-enable form so user can try again
+          form.querySelectorAll("input, select, textarea, button").forEach((el) => el.removeAttribute("disabled"));
+          if (submitBtn) submitBtn.textContent = originalText;
+        }
+      } catch (error) {
+        alert("Something went wrong. Please check your connection and try again.");
+        // Re-enable form so user can try again
+        form.querySelectorAll("input, select, textarea, button").forEach((el) => el.removeAttribute("disabled"));
+        if (submitBtn) submitBtn.textContent = originalText;
+      }
     });
-  })(); // <-- Closes the Contact Form function
-})(); // <-- Closes the Master File function (from line 4)
+  })();
+})();
