@@ -358,11 +358,16 @@ section { position: relative; z-index: 1; }
   }
 
   /* Logo on the left */
-  .nav .brand {
+.nav .brand {
     order: 1;
+    display: flex;
+    align-items: center;
   }
+  
   .nav .brand img {
-    height: 20px; /* Slightly larger now that it has room to breathe */
+    height: 32px; /* Increased from 20px for crisp readability */
+    width: auto;  /* Forces the browser to keep perfect, un-squished proportions */
+    max-width: 60vw; /* Safety net: ensures a very wide logo won't overlap the toggle */
   }
 
   /* Theme Toggle on the right */
