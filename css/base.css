@@ -346,25 +346,36 @@ section { position: relative; z-index: 1; }
   
   /* --- 1. NAVIGATION FIX --- */
   .nav {
-    flex-wrap: wrap; /* Allows the links to drop to a new line */
+    flex-wrap: wrap; 
     padding: 15px 20px;
     gap: 15px;
+    justify-content: space-between; /* Pushes logo left, toggle right */
   }
   
+  /* Keep Logo top left */
   .nav .brand {
-    flex-grow: 1; /* Pushes the theme toggle to the right */
+    order: 1;
   }
 
+  /* Pull Theme Toggle to top right */
+  .nav .theme-toggle {
+    order: 2;
+  }
+
+  /* Push Links to their own row at the bottom */
   .nav .links {
+    order: 3;
     width: 100%;
+    display: flex;
+    flex-wrap: nowrap; /* CRITICAL: Forces elements to stay in a single line */
+    white-space: nowrap; /* CRITICAL: Prevents text from wrapping */
     justify-content: flex-start;
-    overflow-x: auto; /* Allows horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    padding-bottom: 10px; /* Space for invisible scrollbar */
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+    padding-bottom: 10px; 
     gap: 20px;
   }
   
-  /* Hides the ugly scrollbar but keeps the scroll functionality */
   .nav .links::-webkit-scrollbar {
     display: none;
   }
