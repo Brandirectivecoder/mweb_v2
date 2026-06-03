@@ -344,48 +344,32 @@ section { position: relative; z-index: 1; }
    ========================================================= */
 @media (max-width: 768px) {
   
-/* --- 1. NAVIGATION FIX (Single Line) --- */
+/* --- 1. NAVIGATION FIX (Minimalist: Logo & Toggle Only) --- */
   .nav {
-    flex-wrap: nowrap; /* Forces everything onto one horizontal line */
-    padding: 10px 15px; /* Tighter padding for a slimmer pill */
-    gap: 10px; /* Tighter spacing between logo, links, and toggle */
+    flex-wrap: nowrap; 
+    padding: 15px 20px; 
+    justify-content: space-between; /* Pushes Logo left, Toggle right */
     align-items: center;
   }
   
-  /* 1. Scale down the Logo */
+  /* Hide the links completely on mobile */
+  .nav .links {
+    display: none; 
+  }
+
+  /* Logo on the left */
   .nav .brand {
     order: 1;
-    flex-shrink: 0; /* Prevents the logo from getting squished */
   }
   .nav .brand img {
-    height: 18px; /* Shrinks the logo proportionally */
+    height: 20px; /* Slightly larger now that it has room to breathe */
   }
 
-  /* 2. Scale down the Links */
-  .nav .links {
-    order: 2;
-    width: auto;
-    flex-grow: 1; /* Lets the links fill the middle space */
-    display: flex;
-    flex-wrap: nowrap; 
-    white-space: nowrap; 
-    overflow-x: auto; /* Keeps the swipeable scroll just in case the phone is very narrow */
-    -webkit-overflow-scrolling: touch; 
-    padding-bottom: 0; 
-    gap: 12px; /* Tighter gap between individual links */
-    font-size: 13px; /* Shrinks the text to fit more on screen */
-  }
-  
-  .nav .links::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* 3. Scale down the Theme Toggle */
+  /* Theme Toggle on the right */
   .nav .theme-toggle {
-    order: 3;
-    flex-shrink: 0; /* Prevents the toggle from getting squished */
-    transform: scale(0.75); /* Shrinks the whole toggle button by 25% */
-    transform-origin: right center; /* Keeps it anchored to the right edge */
+    order: 2;
+    transform: scale(0.85); /* Scaled down just slightly for mobile proportions */
+    transform-origin: right center;
   }
   
   /* --- 2. HERO META FIX --- */
