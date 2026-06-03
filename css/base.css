@@ -344,40 +344,48 @@ section { position: relative; z-index: 1; }
    ========================================================= */
 @media (max-width: 768px) {
   
-  /* --- 1. NAVIGATION FIX --- */
+/* --- 1. NAVIGATION FIX (Single Line) --- */
   .nav {
-    flex-wrap: wrap; 
-    padding: 15px 20px;
-    gap: 15px;
-    justify-content: space-between; /* Pushes logo left, toggle right */
+    flex-wrap: nowrap; /* Forces everything onto one horizontal line */
+    padding: 10px 15px; /* Tighter padding for a slimmer pill */
+    gap: 10px; /* Tighter spacing between logo, links, and toggle */
+    align-items: center;
   }
   
-  /* Keep Logo top left */
+  /* 1. Scale down the Logo */
   .nav .brand {
     order: 1;
+    flex-shrink: 0; /* Prevents the logo from getting squished */
+  }
+  .nav .brand img {
+    height: 18px; /* Shrinks the logo proportionally */
   }
 
-  /* Pull Theme Toggle to top right */
-  .nav .theme-toggle {
-    order: 2;
-  }
-
-  /* Push Links to their own row at the bottom */
+  /* 2. Scale down the Links */
   .nav .links {
-    order: 3;
-    width: 100%;
+    order: 2;
+    width: auto;
+    flex-grow: 1; /* Lets the links fill the middle space */
     display: flex;
-    flex-wrap: nowrap; /* CRITICAL: Forces elements to stay in a single line */
-    white-space: nowrap; /* CRITICAL: Prevents text from wrapping */
-    justify-content: flex-start;
-    overflow-x: auto; 
+    flex-wrap: nowrap; 
+    white-space: nowrap; 
+    overflow-x: auto; /* Keeps the swipeable scroll just in case the phone is very narrow */
     -webkit-overflow-scrolling: touch; 
-    padding-bottom: 10px; 
-    gap: 20px;
+    padding-bottom: 0; 
+    gap: 12px; /* Tighter gap between individual links */
+    font-size: 13px; /* Shrinks the text to fit more on screen */
   }
   
   .nav .links::-webkit-scrollbar {
     display: none;
+  }
+
+  /* 3. Scale down the Theme Toggle */
+  .nav .theme-toggle {
+    order: 3;
+    flex-shrink: 0; /* Prevents the toggle from getting squished */
+    transform: scale(0.75); /* Shrinks the whole toggle button by 25% */
+    transform-origin: right center; /* Keeps it anchored to the right edge */
   }
   
   /* --- 2. HERO META FIX --- */
