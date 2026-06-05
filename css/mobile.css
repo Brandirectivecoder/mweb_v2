@@ -137,14 +137,15 @@
     -webkit-backdrop-filter: blur(32px) saturate(200%);
     backdrop-filter: blur(32px) saturate(200%);
     border-bottom: 1px solid var(--line);
-    transform: translateY(-110%);
-    transition: transform 0.5s var(--ease);
+    transform: translateY(-100%);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     display: flex;
     flex-direction: column;
     gap: 6px;
   }
 
   .nav-drawer.open {
+    opacity: 1;
     transform: translateY(0);
   }
 
@@ -173,6 +174,12 @@
     color: var(--accent);
     letter-spacing: 0.14em;
   }
+
+  .nav-drawer.open a:nth-child(1) { transition-delay: 0.10s; }
+  .nav-drawer.open a:nth-child(2) { transition-delay: 0.15s; }
+  .nav-drawer.open a:nth-child(3) { transition-delay: 0.20s; }
+  .nav-drawer.open a:nth-child(4) { transition-delay: 0.25s; }
+  .nav-drawer.open a:nth-child(5) { transition-delay: 0.30s; }
 
   .nav-drawer a:hover {
     color: var(--accent);
@@ -461,6 +468,21 @@
    PROCESS — Vertical card stack on mobile (already handled by no-pin)
    Enhance the no-pin appearance
    ========================================================= */
+
+   .process.no-pin .m-card {
+    position: sticky;
+    top: max(100px, 12vh); /* Sticks near the top, under the nav */
+    transform-origin: top center;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.05); /* Adds shadow to separate stacked cards */
+  }
+
+  /* Slight top offsets so they look like a layered deck */
+  .process.no-pin .m-card:nth-child(1) { top: 10vh; }
+  .process.no-pin .m-card:nth-child(2) { top: calc(10vh + 10px); }
+  .process.no-pin .m-card:nth-child(3) { top: calc(10vh + 20px); }
+  .process.no-pin .m-card:nth-child(4) { top: calc(10vh + 30px); }
+  .process.no-pin .m-card:nth-child(5) { top: calc(10vh + 40px); }
+
 @media (max-width: 900px) {
 
   .process.no-pin .process-pin {
@@ -834,6 +856,28 @@
 /* =========================================================
    MOBILE-SPECIFIC TOUCH ENHANCEMENTS
    ========================================================= */
+
+   @media (hover: none) {
+    /* ... keep your existing overrides ... */
+    
+    /* Premium touch squish */
+    .work .mini,
+    .hero-cta,
+    .contact-form button[type="submit"],
+    .r-beli .dish .add {
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                  filter 0.3s ease; /* Bouncy spring curve */
+    }
+
+    .work .mini:active,
+    .hero-cta:active,
+    .contact-form button[type="submit"]:active,
+    .r-beli .dish .add:active {
+      transform: scale(0.94); /* Deeper press */
+      filter: brightness(0.9); /* Subtle dimming */
+      transition: transform 0.1s ease, filter 0.1s ease; /* Instant reaction on tap */
+    }
+  }
 
 /* Prevent text selection during swipe gestures */
 .voices .stack {

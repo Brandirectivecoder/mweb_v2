@@ -90,8 +90,29 @@
   }
 
   /* ── Init ── */
+/* ── Init ── */
   function init() {
-    if (isMobile()) buildMobileNav();
+    if (isMobile()) {
+      buildMobileNav();
+      
+      const htmlEl = document.documentElement;
+
+      /* Function to rip off Lenis classes */
+      const stripLenis = () => {
+        htmlEl.classList.remove('lenis', 'lenis-smooth', 'lenis-scrolling', 'lenis-stopped');
+      };
+
+      /* 1. Do an initial strip */
+      stripLenis();
+
+      /* 2. Set up a guard to watch the HTML tag. 
+            If Lenis tries to add the classes back, instantly remove them. */
+      const observer = new MutationObserver(stripLenis);
+      observer.observe(htmlEl, { attributes: true, attributeFilter: ['class'] });
+
+      /* 3. Still try to destroy the instance if it happens to be global */
+      if (window.__lenis) window.__lenis.destroy();
+    }
   }
 
   /* Re-check on resize (handles rotation) */
